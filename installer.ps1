@@ -2,7 +2,8 @@ Add-Type -AssemblyName PresentationFramework
 
 # Load JSON
 # $programs = Get-Content -Raw -Path ".\programs.json" | ConvertFrom-Json
-$apps = Get-Content -Raw -Path ".\apps.json" | ConvertFrom-Json
+$appsUrl = "https://raw.githubusercontent.com/devo-tion/pget-pw/refs/heads/main/apps.json"
+$apps = Invoke-RestMethod -Uri $appsUrl
 
 # Define static XAML with a placeholder StackPanel
 $xaml = @"

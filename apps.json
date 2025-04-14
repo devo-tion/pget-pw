@@ -1,6 +1,6 @@
 [
 	{
-		"name": "CPUID.CPU-Z"
+		"PackageIdentifier": "CPUID.CPU-Z"
 	},
 	{
 		"PackageIdentifier": "CrystalDewWorld.CrystalDiskMark"
