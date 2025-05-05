@@ -1,188 +1,56 @@
 [
 	{
-		"PackageIdentifier": "CPUID.CPU-Z"
+		"Name": "Example App",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "CrystalDewWorld.CrystalDiskMark"
+		"Name": "Example1 App",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "DigitalExtremes.Warframe"
+		"Name": "Example App1",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "Zen-Team.Zen-Browser"
+		"Name": "Example App1",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "ApacheFriends.Xampp.8.2"
+		"Name": "Example App1",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "glzr-io.zebar"
+		"Name": "Example App1",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "Google.Chrome"
+		"Name": "Example App1",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "Microsoft.VCRedist.2010.x64"
+		"Name": "Example App1",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	},
 	{
-		"PackageIdentifier": "OpenJS.NodeJS"
-	},
-	{
-		"PackageIdentifier": "Google.GoogleDrive"
-	},
-	{
-		"PackageIdentifier": "glzr-io.glazewm"
-	},
-	{
-		"PackageIdentifier": "Microsoft.PowerShell"
-	},
-	{
-		"PackageIdentifier": "Starship.Starship"
-	},
-	{
-		"PackageIdentifier": "Klocman.BulkCrapUninstaller"
-	},
-	{
-		"PackageIdentifier": "Tonec.InternetDownloadManager"
-	},
-	{
-		"PackageIdentifier": "OBSProject.OBSStudio"
-	},
-	{
-		"PackageIdentifier": "Guru3D.RTSS"
-	},
-	{
-		"PackageIdentifier": "Valve.Steam"
-	},
-	{
-		"PackageIdentifier": "Ubisoft.Connect"
-	},
-	{
-		"PackageIdentifier": "RamenSoftware.Windhawk"
-	},
-	{
-		"PackageIdentifier": "qBittorrent.qBittorrent"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCRedist.2013.x64"
-	},
-	{
-		"PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCRedist.2012.x86"
-	},
-	{
-		"PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.9"
-	},
-	{
-		"PackageIdentifier": "Python.Launcher"
-	},
-	{
-		"PackageIdentifier": "TechPowerUp.GPU-Z"
-	},
-	{
-		"PackageIdentifier": "Microsoft.DotNet.SDK.9"
-	},
-	{
-		"PackageIdentifier": "ElectronicArts.EADesktop"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCRedist.2013.x86"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCRedist.2010.x86"
-	},
-	{
-		"PackageIdentifier": "EpicGames.EpicGamesLauncher"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCRedist.2015+.x64"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCRedist.2015+.x86"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCRedist.2012.x64"
-	},
-	{
-		"PackageIdentifier": "AltSnap.AltSnap"
-	},
-	{
-		"PackageIdentifier": "BleachBit.BleachBit"
-	},
-	{
-		"PackageIdentifier": "GIMP.GIMP.3"
-	},
-	{
-		"PackageIdentifier": "PrismLauncher.PrismLauncher"
-	},
-	{
-		"PackageIdentifier": "Spotify.Spotify"
-	},
-	{
-		"PackageIdentifier": "WeMod.WeMod"
-	},
-	{
-		"PackageIdentifier": "Abdelrhman-AK.WinPaletter"
-	},
-	{
-		"PackageIdentifier": "Ferdium.Ferdium"
-	},
-	{
-		"PackageIdentifier": "karlstav.cava"
-	},
-	{
-		"PackageIdentifier": "w4po.ExplorerTabUtility"
-	},
-	{
-		"PackageIdentifier": "Telegram.TelegramDesktop"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VisualStudioCode"
-	},
-	{
-		"PackageIdentifier": "Anysphere.Cursor"
-	},
-	{
-		"PackageIdentifier": "CharlesMilette.TranslucentTB"
-	},
-	{
-		"PackageIdentifier": "M2Team.NanaZip.Preview"
-	},
-	{
-		"PackageIdentifier": "Microsoft.Teams"
-	},
-	{
-		"PackageIdentifier": "Microsoft.AppInstaller"
-	},
-	{
-		"PackageIdentifier": "Microsoft.UI.Xaml.2.7"
-	},
-	{
-		"PackageIdentifier": "Microsoft.UI.Xaml.2.8"
-	},
-	{
-		"PackageIdentifier": "Microsoft.VCLibs.Desktop.14"
-	},
-	{
-		"PackageIdentifier": "Microsoft.WindowsTerminal"
-	},
-	{
-		"PackageIdentifier": "XP8K4RGX25G3GM"
-	},
-	{
-		"PackageIdentifier": "XP89DCGQ3K6VLD"
-	},
-	{
-		"PackageIdentifier": "XPFFTQ032PTPHF"
-	},
-	{
-		"PackageIdentifier": "XP9KN75RRB9NHS"
-	},
-	{
-		"PackageIdentifier": "XPDC2RH70K22MN"
-	},
-	{
-		"PackageIdentifier": "9NRWMJP3717K"
+		"Name": "Example App1",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app",
+		"Category": "Category 1"
 	}
 ]
