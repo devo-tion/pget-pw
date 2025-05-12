@@ -3,7 +3,7 @@
 		"Name": "Example App",
 		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
 		"PackageIdentifier": "example.app",
-		"Category": "Category 1"
+		"Category": "Category 2"
 	},
 	{
 		"Name": "Example1 App",
@@ -30,27 +30,27 @@
 		"Category": "Category 1"
 	},
 	{
-		"Name": "Example App1",
+		"Name": "Example App2",
 		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
-		"PackageIdentifier": "example.app",
+		"PackageIdentifier": "example.app4",
+		"Category": "Category 3"
+	},
+	{
+		"Name": "Example App3",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app3",
 		"Category": "Category 1"
+	},
+	{
+		"Name": "Example App4",
+		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
+		"PackageIdentifier": "example.app2",
+		"Category": "Category 2"
 	},
 	{
 		"Name": "Example App1",
 		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
 		"PackageIdentifier": "example.app",
-		"Category": "Category 1"
-	},
-	{
-		"Name": "Example App1",
-		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
-		"PackageIdentifier": "example.app",
-		"Category": "Category 1"
-	},
-	{
-		"Name": "Example App1",
-		"Description": "This is a [link to website](https://example.com) in the description. You can have [multiple links](https://another-example.com) in the same description.",
-		"PackageIdentifier": "example.app",
-		"Category": "Category 1"
+		"Category": "Category 3"
 	}
 ]

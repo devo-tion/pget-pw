@@ -5,6 +5,20 @@ $apps = Get-Content -Raw -Path ".\apps.json" | ConvertFrom-Json #!important !fet
 # $appsUrl = "https://raw.githubusercontent.com/devo-tion/pget-pw/refs/heads/main/apps.json"
 # $apps = Invoke-RestMethod -Uri $appsUrl
 
+# Load tweaks from JSON
+$tweaksConfig = Get-Content -Raw -Path ".\tweaks.json" | ConvertFrom-Json
+$tweaks = $tweaksConfig.tweaks
+
+# Group tweaks by category
+$tweakCategories = @{}
+foreach ($tweak in $tweaks) {
+    $category = if ($tweak.category) { $tweak.category } else { "General" }
+    if (-not $tweakCategories.ContainsKey($category)) {
+        $tweakCategories[$category] = New-Object System.Collections.ArrayList
+    }
+    $tweakCategories[$category].Add($tweak)
+}
+
 # Define static XAML with a placeholder StackPanel
 $xaml = @"
 <Window 
@@ -94,7 +108,6 @@ $xaml = @"
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TabControl Grid.Row="0">
@@ -103,6 +116,7 @@ $xaml = @"
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
@@ -113,19 +127,38 @@ $xaml = @"
                     <ScrollViewer Grid.Row="1">
                         <StackPanel Name="programList" Margin="5"/>
                     </ScrollViewer>
+
+                    <StackPanel Grid.Row="2">
+                        <ProgressBar Name="progressBar" Margin="0,10,0,10" Minimum="0" Maximum="100"/>
+                        <Button Name="installBtn" Content="Install Selected"/>
+                        <TextBox Name="logBox" Height="100" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
 
             <TabItem Header="Tweaks">
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
                         <Button Name="selectAllFavBtn" Content="Select All" Margin="0,0,5,0"/>
                         <Button Name="uncheckAllFavBtn" Content="Uncheck All" Margin="0,0,5,0"/>
                     </StackPanel>
-                    <ScrollViewer>
-                        <StackPanel Name="favoritesList"/>
+
+                    <ScrollViewer Grid.Row="1">
+                        <StackPanel Name="favoritesList" Margin="5"/>
                     </ScrollViewer>
-                </DockPanel>
+
+                    <StackPanel Grid.Row="2">
+                        <ProgressBar Name="progressBarTweaks" Margin="0,10,0,10" Minimum="0" Maximum="100"/>
+                        <Button Name="installTweaksBtn" Content="Install Selected"/>
+                        <TextBox Name="logBoxTweaks" Height="100" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Grid>
             </TabItem>
 
             <TabItem Header="About">
@@ -136,12 +169,6 @@ $xaml = @"
                 </StackPanel>
             </TabItem>
         </TabControl>
-
-        <StackPanel Grid.Row="1">
-            <ProgressBar Name="progressBar" Margin="0,10,0,10" Minimum="0" Maximum="100"/>
-            <Button Name="installBtn" Content="Install Selected"/>
-            <TextBox Name="logBox" Height="100" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
-        </StackPanel>
     </Grid>
 </Window>
 "@
@@ -156,9 +183,20 @@ $programList = $window.FindName("programList")
 $installBtn = $window.FindName("installBtn")
 $selectAllBtn = $window.FindName("selectAllBtn")
 $uncheckAllBtn = $window.FindName("uncheckAllBtn")
+$progressBar = $window.FindName("progressBar")
+$logBox = $window.FindName("logBox")
+
+# Get Tweaks tab elements
+$favoritesList = $window.FindName("favoritesList")
+$installTweaksBtn = $window.FindName("installTweaksBtn")
+$selectAllFavBtn = $window.FindName("selectAllFavBtn")
+$uncheckAllFavBtn = $window.FindName("uncheckAllFavBtn")
+$progressBarTweaks = $window.FindName("progressBarTweaks")
+$logBoxTweaks = $window.FindName("logBoxTweaks")
 
 # Store checkboxes for later reference
 $checkboxes = @{}
+$tweakCheckboxes = @{}
 
 # Function to create an application item
 function New-AppItem {
@@ -246,6 +284,116 @@ function New-AppItem {
     }
 }
 
+# Function to create a tweak item
+function New-TweakItem {
+    param (
+        [string]$Name,
+        [string]$Description,
+        [string]$FilePath,
+        [string]$FileType
+    )
+    
+    $border = New-Object System.Windows.Controls.Border
+    $border.Style = $window.FindResource("AppItemStyle")
+    $border.Margin = "5"
+    $border.MinWidth = 200
+    $border.MaxWidth = 300
+    $border.Height = 120
+    
+    $grid = New-Object System.Windows.Controls.Grid
+    $grid.RowDefinitions.Add((New-Object System.Windows.Controls.RowDefinition -Property @{Height = "Auto" }))
+    $grid.RowDefinitions.Add((New-Object System.Windows.Controls.RowDefinition -Property @{Height = "*" }))
+    
+    $topPanel = New-Object System.Windows.Controls.StackPanel
+    $topPanel.Orientation = "Horizontal"
+    $topPanel.Margin = "0,0,0,5"
+    
+    $checkbox = New-Object System.Windows.Controls.CheckBox
+    $checkbox.Margin = "0,0,10,0"
+    $checkbox.VerticalAlignment = "Center"
+    
+    $nameText = New-Object System.Windows.Controls.TextBlock
+    $nameText.Text = $Name
+    $nameText.FontWeight = "SemiBold"
+    $nameText.VerticalAlignment = "Center"
+    $nameText.TextWrapping = "Wrap"
+    
+    $topPanel.Children.Add($checkbox)
+    $topPanel.Children.Add($nameText)
+    
+    $grid.Children.Add($topPanel)
+    
+    $descText = New-Object System.Windows.Controls.TextBlock
+    $descText.Text = $Description
+    $descText.TextWrapping = "Wrap"
+    $descText.Foreground = "#AAAAAA"
+    $descText.MaxHeight = 60
+    $descText.TextTrimming = "CharacterEllipsis"
+    $descText.SetValue([System.Windows.Controls.Grid]::RowProperty, 1)
+    
+    $grid.Children.Add($descText)
+    $border.Child = $grid
+    
+    return @{
+        Border   = $border
+        CheckBox = $checkbox
+        FilePath = $FilePath
+        FileType = $FileType
+    }
+}
+
+# Function to execute a tweak file
+function Invoke-TweakFile {
+    param (
+        [string]$FilePath,
+        [string]$FileType,
+        [System.Windows.Controls.TextBox]$LogBox
+    )
+    
+    try {
+        switch ($FileType.ToLower()) {
+            "reg" {
+                $LogBox.AppendText("Applying registry file: $FilePath`r`n")
+                # Create a temporary file to store the reg file content
+                $tempFile = [System.IO.Path]::GetTempFileName()
+                Copy-Item $FilePath $tempFile
+                
+                # Import the registry file
+                $process = Start-Process "reg" -ArgumentList "import `"$tempFile`"" -NoNewWindow -Wait -PassThru
+                
+                # Clean up
+                Remove-Item $tempFile -Force
+                
+                if ($process.ExitCode -eq 0) {
+                    $LogBox.AppendText("Registry file applied successfully`r`n")
+                }
+                else {
+                    throw "Registry import failed with exit code: $($process.ExitCode)"
+                }
+            }
+            "ps1" {
+                $LogBox.AppendText("Executing PowerShell script: $FilePath`r`n")
+                # Execute the PowerShell script with elevated privileges
+                $process = Start-Process "powershell" -ArgumentList "-ExecutionPolicy Bypass -File `"$FilePath`"" -NoNewWindow -Wait -PassThru
+                
+                if ($process.ExitCode -eq 0) {
+                    $LogBox.AppendText("PowerShell script executed successfully`r`n")
+                }
+                else {
+                    throw "PowerShell script failed with exit code: $($process.ExitCode)"
+                }
+            }
+            default {
+                throw "Unsupported file type: $FileType"
+            }
+        }
+    }
+    catch {
+        $LogBox.AppendText("Error: $_`r`n")
+        throw
+    }
+}
+
 # Dynamically add application items
 $categories = @{}
 foreach ($program in $apps) {
@@ -290,25 +438,112 @@ foreach ($category in $categories.Keys | Sort-Object) {
 # Select All button click handler
 $selectAllBtn.Add_Click({
         foreach ($checkbox in $checkboxes.Values) {
-            $checkbox.IsChecked = $true
+            if ($checkbox -ne $null) {
+                $checkbox.IsChecked = $true
+            }
         }
     })
 
 # Uncheck All button click handler
 $uncheckAllBtn.Add_Click({
         foreach ($checkbox in $checkboxes.Values) {
+            if ($checkbox -ne $null) {
+                $checkbox.IsChecked = $false
+            }
+        }
+    })
+
+# Select All button click handler for Tweaks
+$selectAllFavBtn.Add_Click({
+        foreach ($checkbox in $tweakCheckboxes.Values) {
+            $checkbox.IsChecked = $true
+        }
+    })
+
+# Uncheck All button click handler for Tweaks
+$uncheckAllFavBtn.Add_Click({
+        foreach ($checkbox in $tweakCheckboxes.Values) {
             $checkbox.IsChecked = $false
         }
     })
 
+# Add tweaks to the UI
+foreach ($category in $tweakCategories.Keys | Sort-Object) {
+    $expander = New-Object System.Windows.Controls.Expander
+    $expander.Header = $category
+    $expander.IsExpanded = $true
+    $expander.Margin = "0,5,0,5"
+    $expander.Background = "#252526"
+    $expander.BorderBrush = "#3a3a3a"
+    $expander.BorderThickness = "1"
+    
+    $wrapPanel = New-Object System.Windows.Controls.WrapPanel
+    $wrapPanel.Margin = "10,5,5,5"
+    $wrapPanel.ItemWidth = 250
+    $wrapPanel.ItemHeight = 130
+    
+    foreach ($tweak in $tweakCategories[$category]) {
+        $tweakItem = New-TweakItem -Name $tweak.name -Description $tweak.description -FilePath $tweak.filePath -FileType $tweak.fileType
+        $wrapPanel.Children.Add($tweakItem.Border)
+        $tweakCheckboxes[$tweak.filePath] = $tweakItem.CheckBox
+    }
+    
+    $border = New-Object System.Windows.Controls.Border
+    $border.Background = "#252526"
+    $border.BorderBrush = "#3a3a3a"
+    $border.BorderThickness = "1"
+    $border.Padding = "10"
+    $border.Child = $wrapPanel
+    
+    $expander.Content = $border
+    $favoritesList.Children.Add($expander)
+}
+
+# Button click: install selected tweaks
+$installTweaksBtn.Add_Click({
+        $logBoxTweaks.Text = "Starting tweak installation...`r`n"
+        $progressBarTweaks.Value = 0
+        $totalTweaks = ($tweakCheckboxes.Values | Where-Object { $_.IsChecked }).Count
+        $currentTweak = 0
+
+        foreach ($tweak in $tweaks) {
+            $cb = $tweakCheckboxes[$tweak.filePath]
+            if ($cb.IsChecked) {
+                $currentTweak++
+                $progress = ($currentTweak / $totalTweaks) * 100
+                $progressBarTweaks.Value = $progress
+                
+                try {
+                    Invoke-TweakFile -FilePath $tweak.filePath -FileType $tweak.fileType -LogBox $logBoxTweaks
+                }
+                catch {
+                    $logBoxTweaks.AppendText("Failed to apply tweak: $($tweak.name)`r`n")
+                    [System.Windows.MessageBox]::Show("Error applying tweak: $($tweak.name)`n$_", "Error", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+                }
+            }
+        }
+        $logBoxTweaks.AppendText("Tweak installation complete!`r`n")
+        [System.Windows.MessageBox]::Show("Tweak installation complete!")
+    })
+
 # Button click: install selected programs via winget
 $installBtn.Add_Click({
+        $logBox.Text = "Starting application installation...`r`n"
+        $progressBar.Value = 0
+        $totalApps = ($checkboxes.Values | Where-Object { $_.IsChecked }).Count
+        $currentApp = 0
+
         foreach ($program in $apps) {
             $cb = $checkboxes[$program.PackageIdentifier]
             if ($cb.IsChecked) {
+                $currentApp++
+                $progress = ($currentApp / $totalApps) * 100
+                $progressBar.Value = $progress
+                $logBox.AppendText("Installing: $($program.Name)`r`n")
                 Start-Process "winget" -ArgumentList "install --id $($program.PackageIdentifier) -e --accept-source-agreements --accept-package-agreements" -NoNewWindow -Wait
             }
         }
+        $logBox.AppendText("Installation complete!`r`n")
         [System.Windows.MessageBox]::Show("Installation complete!")
     })
 

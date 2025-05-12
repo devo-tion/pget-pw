@@ -1,0 +1,32 @@
+{
+    "tweaks": [
+        {
+            "name": "Disable Windows Telemetry",
+            "description": "Disables Windows telemetry and data collection",
+            "filePath": ".\\tweaks\\disable_telemetry.reg",
+            "fileType": "reg",
+            "category": "Privacy"
+        },
+        {
+            "name": "Optimize Windows Performance",
+            "description": "Applies various performance optimizations",
+            "filePath": ".\\tweaks\\optimize_performance.ps1",
+            "fileType": "ps1",
+            "category": "Performance"
+        },
+        {
+            "name": "Disable Windows Search",
+            "description": "Disables Windows Search service to improve performance",
+            "filePath": ".\\tweaks\\disable_search.reg",
+            "fileType": "reg",
+            "category": "Performance"
+        },
+        {
+            "name": "Enable Dark Mode",
+            "description": "Enables system-wide dark mode",
+            "filePath": ".\\tweaks\\enable_darkmode.reg",
+            "fileType": "reg",
+            "category": "Appearance"
+        }
+    ]
+}
