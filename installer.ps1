@@ -1,9 +1,9 @@
 Add-Type -AssemblyName PresentationFramework
 
 # Load JSON
-$apps = Get-Content -Raw -Path ".\apps.json" | ConvertFrom-Json #!important !fetch config from local files for testing purpose.
-# $appsUrl = "https://raw.githubusercontent.com/devo-tion/pget-pw/refs/heads/main/apps.json"
-# $apps = Invoke-RestMethod -Uri $appsUrl
+# $apps = Get-Content -Raw -Path ".\apps.json" | ConvertFrom-Json #!important !fetch config from local files for testing purpose.
+$appsUrl = "https://raw.githubusercontent.com/devo-tion/pget-pw/refs/heads/main/apps.json"
+$apps = Invoke-RestMethod -Uri $appsUrl
 
 # Load tweaks from JSON
 $tweaksConfig = Get-Content -Raw -Path ".\tweaks.json" | ConvertFrom-Json
@@ -161,6 +161,31 @@ $xaml = @"
                 </Grid>
             </TabItem>
 
+            <TabItem Header="Repair">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+                        <Button Name="selectAllRepairBtn" Content="Select All" Margin="0,0,5,0"/>
+                        <Button Name="uncheckAllRepairBtn" Content="Uncheck All" Margin="0,0,5,0"/>
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Row="1">
+                        <StackPanel Name="repairList" Margin="5"/>
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Row="2">
+                        <ProgressBar Name="progressBarRepair" Margin="0,10,0,10" Minimum="0" Maximum="100"/>
+                        <Button Name="installRepairBtn" Content="Run Selected"/>
+                        <TextBox Name="logBoxRepair" Height="100" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
             <TabItem Header="About">
                 <StackPanel>
                     <TextBlock Text="Pget-pw is a PowerShell script that installs applications using winget."/>
@@ -194,9 +219,18 @@ $uncheckAllFavBtn = $window.FindName("uncheckAllFavBtn")
 $progressBarTweaks = $window.FindName("progressBarTweaks")
 $logBoxTweaks = $window.FindName("logBoxTweaks")
 
+# Get Repair tab elements
+$repairList = $window.FindName("repairList")
+$installRepairBtn = $window.FindName("installRepairBtn")
+$selectAllRepairBtn = $window.FindName("selectAllRepairBtn")
+$uncheckAllRepairBtn = $window.FindName("uncheckAllRepairBtn")
+$progressBarRepair = $window.FindName("progressBarRepair")
+$logBoxRepair = $window.FindName("logBoxRepair")
+
 # Store checkboxes for later reference
 $checkboxes = @{}
 $tweakCheckboxes = @{}
+$repairCheckboxes = @{}
 
 # Function to create an application item
 function New-AppItem {
@@ -409,7 +443,7 @@ foreach ($program in $apps) {
 foreach ($category in $categories.Keys | Sort-Object) {
     $expander = New-Object System.Windows.Controls.Expander
     $expander.Header = $category
-    $expander.IsExpanded = $true
+    $expander.IsExpanded = $false
     $expander.Margin = "0,5,0,5"
     $expander.Background = "#252526"
     $expander.BorderBrush = "#3a3a3a"
@@ -467,11 +501,25 @@ $uncheckAllFavBtn.Add_Click({
         }
     })
 
+# Select All button click handler for Repair
+$selectAllRepairBtn.Add_Click({
+        foreach ($checkbox in $repairCheckboxes.Values) {
+            $checkbox.IsChecked = $true
+        }
+    })
+
+# Uncheck All button click handler for Repair
+$uncheckAllRepairBtn.Add_Click({
+        foreach ($checkbox in $repairCheckboxes.Values) {
+            $checkbox.IsChecked = $false
+        }
+    })
+
 # Add tweaks to the UI
 foreach ($category in $tweakCategories.Keys | Sort-Object) {
     $expander = New-Object System.Windows.Controls.Expander
     $expander.Header = $category
-    $expander.IsExpanded = $true
+    $expander.IsExpanded = $false
     $expander.Margin = "0,5,0,5"
     $expander.Background = "#252526"
     $expander.BorderBrush = "#3a3a3a"
@@ -497,6 +545,38 @@ foreach ($category in $tweakCategories.Keys | Sort-Object) {
     
     $expander.Content = $border
     $favoritesList.Children.Add($expander)
+}
+
+# Add repair items to the UI
+foreach ($category in $tweakCategories.Keys | Sort-Object) {
+    $expander = New-Object System.Windows.Controls.Expander
+    $expander.Header = $category
+    $expander.IsExpanded = $false
+    $expander.Margin = "0,5,0,5"
+    $expander.Background = "#252526"
+    $expander.BorderBrush = "#3a3a3a"
+    $expander.BorderThickness = "1"
+    
+    $wrapPanel = New-Object System.Windows.Controls.WrapPanel
+    $wrapPanel.Margin = "10,5,5,5"
+    $wrapPanel.ItemWidth = 250
+    $wrapPanel.ItemHeight = 130
+    
+    foreach ($tweak in $tweakCategories[$category]) {
+        $tweakItem = New-TweakItem -Name $tweak.name -Description $tweak.description -FilePath $tweak.filePath -FileType $tweak.fileType
+        $wrapPanel.Children.Add($tweakItem.Border)
+        $repairCheckboxes[$tweak.filePath] = $tweakItem.CheckBox
+    }
+    
+    $border = New-Object System.Windows.Controls.Border
+    $border.Background = "#252526"
+    $border.BorderBrush = "#3a3a3a"
+    $border.BorderThickness = "1"
+    $border.Padding = "10"
+    $border.Child = $wrapPanel
+    
+    $expander.Content = $border
+    $repairList.Children.Add($expander)
 }
 
 # Button click: install selected tweaks
@@ -545,6 +625,33 @@ $installBtn.Add_Click({
         }
         $logBox.AppendText("Installation complete!`r`n")
         [System.Windows.MessageBox]::Show("Installation complete!")
+    })
+
+# Button click: run selected repairs
+$installRepairBtn.Add_Click({
+        $logBoxRepair.Text = "Starting repair operations...`r`n"
+        $progressBarRepair.Value = 0
+        $totalRepairs = ($repairCheckboxes.Values | Where-Object { $_.IsChecked }).Count
+        $currentRepair = 0
+
+        foreach ($tweak in $tweaks) {
+            $cb = $repairCheckboxes[$tweak.filePath]
+            if ($cb.IsChecked) {
+                $currentRepair++
+                $progress = ($currentRepair / $totalRepairs) * 100
+                $progressBarRepair.Value = $progress
+                
+                try {
+                    Invoke-TweakFile -FilePath $tweak.filePath -FileType $tweak.fileType -LogBox $logBoxRepair
+                }
+                catch {
+                    $logBoxRepair.AppendText("Failed to run repair: $($tweak.name)`r`n")
+                    [System.Windows.MessageBox]::Show("Error running repair: $($tweak.name)`n$_", "Error", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+                }
+            }
+        }
+        $logBoxRepair.AppendText("Repair operations complete!`r`n")
+        [System.Windows.MessageBox]::Show("Repair operations complete!")
     })
 
 # Run GUI

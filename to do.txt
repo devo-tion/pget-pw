@@ -1,0 +1,7 @@
+ tweaks
+ https://www.tenforums.com/tutorials/65668-disable-desktop-wallpaper-jpeg-quality-reduction-windows-10-a.html
+  make a slider or adjustable with 0 50 100
+  LocalSend
+  https://pairdrop.net/
+  https://www.terabox.com/portuguese
+  
