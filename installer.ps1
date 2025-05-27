@@ -27,7 +27,7 @@ $xaml = @"
 <Window 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="App Installer" WindowState="Maximized" ResizeMode="NoResize"
+    Title="pw-pget - Easy windows apps and configurations toolbox"" WindowState="Normal" ResizeMode="NoResize"
     Background="#1e1e1e" FontFamily="Segoe UI" Foreground="White">
 
     <Window.Resources>
