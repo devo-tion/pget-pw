@@ -1,9 +1,12 @@
 Add-Type -AssemblyName PresentationFramework
+Add-Type -AssemblyName WindowsBase
+Add-Type -AssemblyName PresentationCore
+Add-Type -AssemblyName System.Xaml
 
 # Load JSON
-# $apps = Get-Content -Raw -Path ".\apps.json" | ConvertFrom-Json #!important !fetch config from local files for testing purpose.
-$appsUrl = "https://raw.githubusercontent.com/devo-tion/pget-pw/refs/heads/main/apps.json"
-$apps = Invoke-RestMethod -Uri $appsUrl
+$appsConfig = Get-Content -Raw -Path ".\apps.json" | ConvertFrom-Json #!important !fetch config from local files for testing purpose.
+#$appsUrl = "https://raw.githubusercontent.com/devo-tion/pget-pw/refs/heads/main/apps.json"
+#$apps = Invoke-RestMethod -Uri $appsUrl
 
 # Load tweaks from JSON
 $tweaksConfig = Get-Content -Raw -Path ".\tweaks.json" | ConvertFrom-Json
@@ -92,6 +95,32 @@ $xaml = @"
             <Setter Property="BorderBrush" Value="#3a3a3a"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <!-- Style for toggle switch -->
+        <Style x:Key="ToggleSwitchStyle" TargetType="ToggleButton">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="#3a3a3a"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="10">
+                            <Grid>
+                                <Ellipse x:Name="Dot" Width="16" Height="16" Fill="White" HorizontalAlignment="Left" Margin="2,0,0,0"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="#0078D7"/>
+                                <Setter TargetName="Dot" Property="HorizontalAlignment" Value="Right"/>
+                                <Setter TargetName="Dot" Property="Margin" Value="0,0,2,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!-- Style for application items -->
@@ -189,7 +218,7 @@ $xaml = @"
             <TabItem Header="About">
                 <StackPanel>
                     <TextBlock Text="Pget-pw is a PowerShell script that installs applications using winget."/>
-                    <TextBlock Text="Version 0.1"/>
+                    <TextBlock Text="Version 1"/>
                     <TextBlock Text="Author: devo-tion"/>
                 </StackPanel>
             </TabItem>
@@ -342,9 +371,10 @@ function New-TweakItem {
     $topPanel.Orientation = "Horizontal"
     $topPanel.Margin = "0,0,0,5"
     
-    $checkbox = New-Object System.Windows.Controls.CheckBox
-    $checkbox.Margin = "0,0,10,0"
-    $checkbox.VerticalAlignment = "Center"
+    $toggle = New-Object System.Windows.Controls.Primitives.ToggleButton
+    $toggle.Style = $window.FindResource("ToggleSwitchStyle")
+    $toggle.Margin = "0,0,10,0"
+    $toggle.VerticalAlignment = "Center"
     
     $nameText = New-Object System.Windows.Controls.TextBlock
     $nameText.Text = $Name
@@ -352,7 +382,7 @@ function New-TweakItem {
     $nameText.VerticalAlignment = "Center"
     $nameText.TextWrapping = "Wrap"
     
-    $topPanel.Children.Add($checkbox)
+    $topPanel.Children.Add($toggle)
     $topPanel.Children.Add($nameText)
     
     $grid.Children.Add($topPanel)
@@ -370,7 +400,7 @@ function New-TweakItem {
     
     return @{
         Border   = $border
-        CheckBox = $checkbox
+        Toggle   = $toggle
         FilePath = $FilePath
         FileType = $FileType
     }
@@ -428,15 +458,15 @@ function Invoke-TweakFile {
     }
 }
 
-# Dynamically add application items
+# Create expandable categories for apps
 $categories = @{}
-foreach ($program in $apps) {
-    $appItem = New-AppItem -Name $program.Name -Description $program.Description -PackageIdentifier $program.PackageIdentifier -Category $program.Category
-    if (-not $categories.ContainsKey($program.Category)) {
-        $categories[$program.Category] = New-Object System.Collections.ArrayList
+foreach ($category in $appsConfig.categories) {
+    $categories[$category] = New-Object System.Collections.ArrayList
+    foreach ($package in $appsConfig.packages | Where-Object { $_.category -eq $category }) {
+        $appItem = New-AppItem -Name $package.name -Description $package.description -PackageIdentifier $package.packageIdentifier -Category $category
+        $categories[$category].Add($appItem)
+        $checkboxes[$package.packageIdentifier] = $appItem.CheckBox
     }
-    $categories[$program.Category].Add($appItem)
-    $checkboxes[$program.PackageIdentifier] = $appItem.CheckBox
 }
 
 # Create expandable categories
@@ -517,13 +547,12 @@ $uncheckAllRepairBtn.Add_Click({
 
 # Add tweaks to the UI
 foreach ($category in $tweakCategories.Keys | Sort-Object) {
-    $expander = New-Object System.Windows.Controls.Expander
-    $expander.Header = $category
-    $expander.IsExpanded = $false
-    $expander.Margin = "0,5,0,5"
-    $expander.Background = "#252526"
-    $expander.BorderBrush = "#3a3a3a"
-    $expander.BorderThickness = "1"
+    $categoryTitle = New-Object System.Windows.Controls.TextBlock
+    $categoryTitle.Text = $category
+    $categoryTitle.FontSize = 16
+    $categoryTitle.FontWeight = "Bold"
+    $categoryTitle.Margin = "0,10,0,5"
+    $favoritesList.Children.Add($categoryTitle)
     
     $wrapPanel = New-Object System.Windows.Controls.WrapPanel
     $wrapPanel.Margin = "10,5,5,5"
@@ -533,29 +562,20 @@ foreach ($category in $tweakCategories.Keys | Sort-Object) {
     foreach ($tweak in $tweakCategories[$category]) {
         $tweakItem = New-TweakItem -Name $tweak.name -Description $tweak.description -FilePath $tweak.filePath -FileType $tweak.fileType
         $wrapPanel.Children.Add($tweakItem.Border)
-        $tweakCheckboxes[$tweak.filePath] = $tweakItem.CheckBox
+        $tweakCheckboxes[$tweak.filePath] = $tweakItem.Toggle
     }
     
-    $border = New-Object System.Windows.Controls.Border
-    $border.Background = "#252526"
-    $border.BorderBrush = "#3a3a3a"
-    $border.BorderThickness = "1"
-    $border.Padding = "10"
-    $border.Child = $wrapPanel
-    
-    $expander.Content = $border
-    $favoritesList.Children.Add($expander)
+    $favoritesList.Children.Add($wrapPanel)
 }
 
 # Add repair items to the UI
 foreach ($category in $tweakCategories.Keys | Sort-Object) {
-    $expander = New-Object System.Windows.Controls.Expander
-    $expander.Header = $category
-    $expander.IsExpanded = $false
-    $expander.Margin = "0,5,0,5"
-    $expander.Background = "#252526"
-    $expander.BorderBrush = "#3a3a3a"
-    $expander.BorderThickness = "1"
+    $categoryTitle = New-Object System.Windows.Controls.TextBlock
+    $categoryTitle.Text = $category
+    $categoryTitle.FontSize = 16
+    $categoryTitle.FontWeight = "Bold"
+    $categoryTitle.Margin = "0,10,0,5"
+    $repairList.Children.Add($categoryTitle)
     
     $wrapPanel = New-Object System.Windows.Controls.WrapPanel
     $wrapPanel.Margin = "10,5,5,5"
@@ -565,18 +585,10 @@ foreach ($category in $tweakCategories.Keys | Sort-Object) {
     foreach ($tweak in $tweakCategories[$category]) {
         $tweakItem = New-TweakItem -Name $tweak.name -Description $tweak.description -FilePath $tweak.filePath -FileType $tweak.fileType
         $wrapPanel.Children.Add($tweakItem.Border)
-        $repairCheckboxes[$tweak.filePath] = $tweakItem.CheckBox
+        $repairCheckboxes[$tweak.filePath] = $tweakItem.Toggle
     }
     
-    $border = New-Object System.Windows.Controls.Border
-    $border.Background = "#252526"
-    $border.BorderBrush = "#3a3a3a"
-    $border.BorderThickness = "1"
-    $border.Padding = "10"
-    $border.Child = $wrapPanel
-    
-    $expander.Content = $border
-    $repairList.Children.Add($expander)
+    $repairList.Children.Add($wrapPanel)
 }
 
 # Button click: install selected tweaks
@@ -587,8 +599,8 @@ $installTweaksBtn.Add_Click({
         $currentTweak = 0
 
         foreach ($tweak in $tweaks) {
-            $cb = $tweakCheckboxes[$tweak.filePath]
-            if ($cb.IsChecked) {
+            $toggle = $tweakCheckboxes[$tweak.filePath]
+            if ($toggle.IsChecked) {
                 $currentTweak++
                 $progress = ($currentTweak / $totalTweaks) * 100
                 $progressBarTweaks.Value = $progress
@@ -613,14 +625,14 @@ $installBtn.Add_Click({
         $totalApps = ($checkboxes.Values | Where-Object { $_.IsChecked }).Count
         $currentApp = 0
 
-        foreach ($program in $apps) {
-            $cb = $checkboxes[$program.PackageIdentifier]
+        foreach ($program in $appsConfig.packages) {
+            $cb = $checkboxes[$program.packageIdentifier]
             if ($cb.IsChecked) {
                 $currentApp++
                 $progress = ($currentApp / $totalApps) * 100
                 $progressBar.Value = $progress
-                $logBox.AppendText("Installing: $($program.Name)`r`n")
-                Start-Process "winget" -ArgumentList "install --id $($program.PackageIdentifier) -e --accept-source-agreements --accept-package-agreements" -NoNewWindow -Wait
+                $logBox.AppendText("Installing: $($program.name)`r`n")
+                Start-Process "winget" -ArgumentList "install --id $($program.packageIdentifier) -e --accept-source-agreements --accept-package-agreements" -NoNewWindow -Wait
             }
         }
         $logBox.AppendText("Installation complete!`r`n")
@@ -635,8 +647,8 @@ $installRepairBtn.Add_Click({
         $currentRepair = 0
 
         foreach ($tweak in $tweaks) {
-            $cb = $repairCheckboxes[$tweak.filePath]
-            if ($cb.IsChecked) {
+            $toggle = $repairCheckboxes[$tweak.filePath]
+            if ($toggle.IsChecked) {
                 $currentRepair++
                 $progress = ($currentRepair / $totalRepairs) * 100
                 $progressBarRepair.Value = $progress

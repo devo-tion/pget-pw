@@ -1,494 +1,139 @@
-[
-	{
-		"Name": "AutoHotkey",
-		"Description": "AutoHotkey is an automation scripting language for Windows.",
-		"PackageIdentifier": "AutoHotkey.AutoHotkey",
-		"Category": "Automation Utilities"
-	},
-	{
-		"Name": "CPU-Z",
-		"Description": "CPU-Z is a system profiling and monitoring application for Microsoft Windows and Android that detects the central processing unit, RAM, motherboard chip-set, and other hardware features.",
-		"PackageIdentifier": "CPUID.CPU-Z",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "CrystalDiskInfo",
-		"Description": "CrystalDiskInfo is a HDD/SSD utility software which supports S.M.A.R.T. and some parts of USB-HDD.",
-		"PackageIdentifier": "CrystalDewWorld.CrystalDiskInfo",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "CrystalDiskMark",
-		"Description": "CrystalDiskMark is a disk benchmark software.",
-		"PackageIdentifier": "CrystalDewWorld.CrystalDiskMark",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "Git",
-		"Description": "Git is a distributed version control system.",
-		"PackageIdentifier": "Git.Git",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "PotPlayer",
-		"Description": "PotPlayer is a multimedia software player developed for Microsoft Windows.",
-		"PackageIdentifier": "Daum.PotPlayer",
-		"Category": "Media & Design"
-	},
-	{
-		"Name": "Warframe",
-		"Description": "Warframe is a free-to-play action role-playing third-person shooter multiplayer online game.",
-		"PackageIdentifier": "DigitalExtremes.Warframe",
-		"Category": "Gaming & Entertainment"
-	},
-	{
-		"Name": "VLC Media Player",
-		"Description": "VLC is a free and open-source portable cross-platform media player software and streaming media server.",
-		"PackageIdentifier": "VideoLAN.VLC",
-		"Category": "Media & Design"
-	},
-	{
-		"Name": "WizTree",
-		"Description": "WizTree is a disk space analyzer for quickly scanning your entire hard drive and showing you which files and folders are using the most disk space.",
-		"PackageIdentifier": "AntibodySoftware.WizTree",
-		"Category": "File Management"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2010 Redistributable (x64)",
-		"Description": "The Microsoft Visual C++ 2010 Redistributable Package (x64) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2010 on a 64-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2010.x64",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2008 Redistributable (x64)",
-		"Description": "The Microsoft Visual C++ 2008 Redistributable Package (x64) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2008 on a 64-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2008.x64",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Google Drive",
-		"Description": "Google Drive is a file storage and synchronization service developed by Google.",
-		"PackageIdentifier": "Google.GoogleDrive",
-		"Category": "Internet & Productivity"
-	},
-	{
-		"Name": "Starship",
-		"Description": "Starship is a minimal, blazing-fast, and infinitely customizable prompt for any shell!",
-		"PackageIdentifier": "Starship.Starship",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "PowerShell",
-		"Description": "PowerShell is a task automation and configuration management program from Microsoft, consisting of a command-line shell and the associated scripting language.",
-		"PackageIdentifier": "Microsoft.PowerShell",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "Oracle JDK 24",
-		"Description": "Oracle Java Development Kit version 24.",
-		"PackageIdentifier": "Oracle.JDK.24",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "Bulk Crap Uninstaller",
-		"Description": "Bulk Crap Uninstaller is a free (as in speech and beer) bulk program uninstaller with advanced automation.",
-		"PackageIdentifier": "Klocman.BulkCrapUninstaller",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "Internet Download Manager",
-		"Description": "Internet Download Manager (IDM) is a tool to increase download speeds, resume and schedule downloads.",
-		"PackageIdentifier": "Tonec.InternetDownloadManager",
-		"Category": "Internet & Productivity"
-	},
-	{
-		"Name": "Microsoft Edge",
-		"Description": "Microsoft Edge is a web browser developed by Microsoft.",
-		"PackageIdentifier": "Microsoft.Edge",
-		"Category": "Internet & Productivity"
-	},
-	{
-		"Name": "OBS Studio",
-		"Description": "OBS Studio is a free and open-source software for video recording and live streaming.",
-		"PackageIdentifier": "OBSProject.OBSStudio",
-		"Category": "Media & Design"
-	},
-	{
-		"Name": "Steam",
-		"Description": "Steam is a video game digital distribution service by Valve.",
-		"PackageIdentifier": "Valve.Steam",
-		"Category": "Gaming & Entertainment"
-	},
-	{
-		"Name": "Windhawk",
-		"Description": "Windhawk is a customization marketplace for the Windows OS.",
-		"PackageIdentifier": "RamenSoftware.Windhawk",
-		"Category": "Customization"
-	},
-	{
-		"Name": "qBittorrent",
-		"Description": "qBittorrent is a cross-platform free and open-source BitTorrent client.",
-		"PackageIdentifier": "qBittorrent.qBittorrent",
-		"Category": "Internet & Productivity"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2013 Redistributable (x64)",
-		"Description": "The Microsoft Visual C++ 2013 Redistributable Package (x64) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2013 on a 64-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2013.x64",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Epic Games Launcher",
-		"Description": "Epic Games Launcher is a digital storefront for video games, from Epic Games.",
-		"PackageIdentifier": "EpicGames.EpicGamesLauncher",
-		"Category": "Gaming & Entertainment"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2012 Redistributable (x86)",
-		"Description": "The Microsoft Visual C++ 2012 Redistributable Package (x86) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2012 on a 32-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2012.x86",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2015-2022 Redistributable (x86)",
-		"Description": "The Microsoft Visual C++ 2015-2022 Redistributable Package (x86) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2015, 2017, 2019 and 2022 on a 32-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2015+.x86",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Python Launcher",
-		"Description": "Python Launcher for Windows.",
-		"PackageIdentifier": "Python.Launcher",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2005 Redistributable (x86)",
-		"Description": "The Microsoft Visual C++ 2005 Redistributable Package (x86) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2005 on a 32-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2005.x86",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": ".NET Core Runtime 3.1",
-		"Description": "Microsoft .NET Core Runtime 3.1. This runtime is required to run applications built with .NET Core 3.1.",
-		"PackageIdentifier": "Microsoft.DotNet.Runtime.3_1",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft PowerToys",
-		"Description": "Microsoft PowerToys is a set of freeware system utilities designed for power users developed by Microsoft for use on the Windows operating system.",
-		"PackageIdentifier": "Microsoft.PowerToys",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "GPU-Z",
-		"Description": "TechPowerUp GPU-Z is a lightweight utility designed to provide information about your video card and GPU.",
-		"PackageIdentifier": "TechPowerUp.GPU-Z",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2008 Redistributable (x86)",
-		"Description": "The Microsoft Visual C++ 2008 Redistributable Package (x86) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2008 on a 32-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2008.x86",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2013 Redistributable (x86)",
-		"Description": "The Microsoft Visual C++ 2013 Redistributable Package (x86) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2013 on a 32-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2013.x86",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2010 Redistributable (x86)",
-		"Description": "The Microsoft Visual C++ 2010 Redistributable Package (x86) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2010 on a 32-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2010.x86",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": ".NET Desktop Runtime 9",
-		"Description": "Microsoft .NET Desktop Runtime 9. This runtime allows you to run existing Windows desktop applications.",
-		"PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.9",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2015-2022 Redistributable (x64)",
-		"Description": "The Microsoft Visual C++ 2015-2022 Redistributable Package (x64) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2015, 2017, 2019 and 2022 on a 64-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2015+.x64",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Visual C++ 2012 Redistributable (x64)",
-		"Description": "The Microsoft Visual C++ 2012 Redistributable Package (x64) installs runtime components of Visual C++ Libraries required to run applications developed with Visual C++ 2012 on a 64-bit operating system.",
-		"PackageIdentifier": "Microsoft.VCRedist.2012.x64",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": ".NET Desktop Runtime 8",
-		"Description": "Microsoft .NET Desktop Runtime 8. This runtime allows you to run existing Windows desktop applications.",
-		"PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.8",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "EA Desktop App",
-		"Description": "EA Desktop App is Electronic Arts' gaming platform.",
-		"PackageIdentifier": "ElectronicArts.EADesktop",
-		"Category": "Gaming & Entertainment"
-	},
-	{
-		"Name": "AltSnap",
-		"Description": "AltSnap is a utility that allows you to drag and resize windows in a new way.",
-		"PackageIdentifier": "AltSnap.AltSnap",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "BleachBit",
-		"Description": "BleachBit quickly frees disk space and tirelessly guards your privacy. Free cache, delete cookies, clear Internet history, shred temporary files, delete logs, and discard junk you didn't know was there.",
-		"PackageIdentifier": "BleachBit.BleachBit",
-		"Category": "Security & Privacy"
-	},
-	{
-		"Name": "CapCut",
-		"Description": "CapCut is a free all-in-one video editing app.",
-		"PackageIdentifier": "ByteDance.CapCut",
-		"Category": "Media & Design"
-	},
-	{
-		"Name": "Discord",
-		"Description": "Discord is a VoIP, instant messaging and digital distribution platform designed for creating communities.",
-		"PackageIdentifier": "Discord.Discord",
-		"Category": "Communication"
-	},
-	{
-		"Name": "Flow Launcher",
-		"Description": "Flow Launcher is a quick file search & app launcher for Windows.",
-		"PackageIdentifier": "Flow-Launcher.Flow-Launcher",
-		"Category": "Launchers & Search"
-	},
-	{
-		"Name": "Spotify",
-		"Description": "Spotify is a digital music, podcast, and video service that gives you access to millions of songs and other content from creators all over the world.",
-		"PackageIdentifier": "Spotify.Spotify",
-		"Category": "Media & Design"
-	},
-	{
-		"Name": "WinPaletter",
-		"Description": "WinPaletter is a tool to colorize Windows accents.",
-		"PackageIdentifier": "Abdelrhman-AK.WinPaletter",
-		"Category": "Customization"
-	},
-	{
-		"Name": "Explorer Tab Utility",
-		"Description": "Explorer Tab Utility is a utility to enhance Windows File Explorer with tabs.",
-		"PackageIdentifier": "w4po.ExplorerTabUtility",
-		"Category": "File Management"
-	},
-	{
-		"Name": "Python 3.13",
-		"Description": "Python is a programming language. This is version 3.13.",
-		"PackageIdentifier": "Python.Python.3.13",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "Visual Studio Code",
-		"Description": "Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop.",
-		"PackageIdentifier": "Microsoft.VisualStudioCode",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "UniGetUI",
-		"Description": "UniGetUI (UnifiedGet User Interface) is a graphical user interface for popular command-line package managers for Windows such as Winget, Scoop, Chocolatey, etc.",
-		"PackageIdentifier": "MartiCliment.UniGetUI",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "Cursor",
-		"Description": "Cursor is an AI-first code editor.",
-		"PackageIdentifier": "Anysphere.Cursor",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "NanaZip",
-		"Description": "NanaZip is an open source file archiver intended for the modern Windows experience.",
-		"PackageIdentifier": "M2Team.NanaZip",
-		"Category": "File Management"
-	},
-	{
-		"Name": "Microsoft Teams",
-		"Description": "Microsoft Teams is a persistent chat-based collaboration platform complete with document sharing, online meetings, and many more extremely useful features for business communications.",
-		"PackageIdentifier": "Microsoft.Teams",
-		"Category": "Communication"
-	},
-	{
-		"Name": "App Installer",
-		"Description": "App Installer for Windows 10 makes sideloading Windows 10 apps easy.",
-		"PackageIdentifier": "Microsoft.AppInstaller",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "Microsoft UI Xaml 2.8",
-		"Description": "Microsoft UI Xaml 2.8 provides the latest version of the WinUI 2 framework for UWP applications.",
-		"PackageIdentifier": "Microsoft.UI.Xaml.2.8",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Visual C++ Libraries Desktop 14",
-		"Description": "Microsoft Visual C++ Libraries for Desktop Bridge (Centennial) apps.",
-		"PackageIdentifier": "Microsoft.VCLibs.Desktop.14",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Windows Terminal",
-		"Description": "Windows Terminal is a new, modern, feature-rich, productive terminal application for command-line users.",
-		"PackageIdentifier": "Microsoft.WindowsTerminal",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "Zen Browser",
-		"Description": "Zen Browser is a web browser.",
-		"PackageIdentifier": "Zen-Team.Zen-Browser",
-		"Category": "Internet & Productivity"
-	},
-	{
-		"Name": "XAMPP",
-		"Description": "XAMPP is a completely free, easy to install Apache distribution containing MariaDB, PHP, and Perl.",
-		"PackageIdentifier": "ApacheFriends.Xampp.8.2",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "Zebar",
-		"Description": "Zebar is a utility software.",
-		"PackageIdentifier": "glzr-io.zebar",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "Google Chrome",
-		"Description": "Google Chrome is a web browser developed by Google.",
-		"PackageIdentifier": "Google.Chrome",
-		"Category": "Internet & Productivity"
-	},
-	{
-		"Name": "Node.js",
-		"Description": "Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web browser.",
-		"PackageIdentifier": "OpenJS.NodeJS",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "GlazeWM",
-		"Description": "GlazeWM is a tiling window manager for Windows inspired by i3wm.",
-		"PackageIdentifier": "glzr-io.glazewm",
-		"Category": "Customization"
-	},
-	{
-		"Name": "RivaTuner Statistics Server (RTSS)",
-		"Description": "RivaTuner Statistics Server (RTSS) is a framerate monitoring, on-screen display, and high-performance video capture service provider for other utilities.",
-		"PackageIdentifier": "Guru3D.RTSS",
-		"Category": "System Utilities & Tools"
-	},
-	{
-		"Name": "Ubisoft Connect",
-		"Description": "Ubisoft Connect is a digital distribution, digital rights management, multiplayer and communications service created by Ubisoft.",
-		"PackageIdentifier": "Ubisoft.Connect",
-		"Category": "Gaming & Entertainment"
-	},
-	{
-		"Name": ".NET Desktop Runtime 6",
-		"Description": "Microsoft .NET Desktop Runtime 6. This runtime allows you to run existing Windows desktop applications.",
-		"PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": ".NET SDK 9",
-		"Description": "Microsoft .NET SDK 9. Software Development Kit for building .NET applications.",
-		"PackageIdentifier": "Microsoft.DotNet.SDK.9",
-		"Category": "Development & Programming"
-	},
-	{
-		"Name": "GIMP 3",
-		"Description": "GIMP (GNU Image Manipulation Program) is a free and open-source raster graphics editor used for image retouching and editing, free-form drawing, converting between different image formats, and more specialized tasks.",
-		"PackageIdentifier": "GIMP.GIMP.3",
-		"Category": "Media & Design"
-	},
-	{
-		"Name": "Prism Launcher",
-		"Description": "Prism Launcher is an open source custom Minecraft launcher with a focus on freedom and customizability.",
-		"PackageIdentifier": "PrismLauncher.PrismLauncher",
-		"Category": "Gaming & Entertainment"
-	},
-	{
-		"Name": "WeMod",
-		"Description": "WeMod is a platform that provides cheats and trainers for PC games.",
-		"PackageIdentifier": "WeMod.WeMod",
-		"Category": "Gaming & Entertainment"
-	},
-	{
-		"Name": "Ferdium",
-		"Description": "Ferdium is a desktop app that helps you organize how you use your favorite apps by combining them into one application.",
-		"PackageIdentifier": "Ferdium.Ferdium",
-		"Category": "Productivity & All-in-One Messengers"
-	},
-	{
-		"Name": "Cava",
-		"Description": "Cava is a bar spectrum audio visualizer for the terminal.",
-		"PackageIdentifier": "karlstav.cava",
-		"Category": "Media & Design"
-	},
-	{
-		"Name": "Telegram Desktop",
-		"Description": "Telegram Desktop is a fast and secure desktop app, perfectly synced with your mobile phone.",
-		"PackageIdentifier": "Telegram.TelegramDesktop",
-		"Category": "Communication"
-	},
-	{
-		"Name": "TranslucentTB",
-		"Description": "TranslucentTB is a lightweight utility that makes the Windows taskbar translucent/transparent.",
-		"PackageIdentifier": "CharlesMilette.TranslucentTB",
-		"Category": "Customization"
-	},
-	{
-		"Name": "NanaZip Preview",
-		"Description": "NanaZip Preview is a preview version of the open source file archiver NanaZip.",
-		"PackageIdentifier": "M2Team.NanaZip.Preview",
-		"Category": "File Management"
-	},
-	{
-		"Name": "Microsoft UI Xaml 2.7",
-		"Description": "Microsoft UI Xaml 2.7 provides a version of the WinUI 2 framework for UWP applications.",
-		"PackageIdentifier": "Microsoft.UI.Xaml.2.7",
-		"Category": "System Runtimes & Libraries"
-	},
-	{
-		"Name": "Microsoft Store App (XP8K4RGX25G3GM)",
-		"Description": "A Microsoft Store application. The specific application name can be found on the Microsoft Store using this ID.",
-		"PackageIdentifier": "XP8K4RGX25G3GM",
-		"Category": "Microsoft Store Application"
-	},
-	{
-		"Name": "Microsoft Store App (XP89DCGQ3K6VLD)",
-		"Description": "A Microsoft Store application. The specific application name can be found on the Microsoft Store using this ID.",
-		"PackageIdentifier": "XP89DCGQ3K6VLD",
-		"Category": "Microsoft Store Application"
-	},
-	{
-		"Name": "Microsoft Store App (XPFFTQ032PTPHF)",
-		"Description": "A Microsoft Store application. The specific application name can be found on the Microsoft Store using this ID.",
-		"PackageIdentifier": "XPFFTQ032PTPHF",
-		"Category": "Microsoft Store Application"
-	},
-	{
-		"Name": "Microsoft Store App (XP9KN75RRB9NHS)",
-		"Description": "A Microsoft Store application. The specific application name can be found on the Microsoft Store using this ID.",
-		"PackageIdentifier": "XP9KN75RRB9NHS",
-		"Category": "Microsoft Store Application"
-	},
-	{
-		"Name": "Microsoft Store App (XPDC2RH70K22MN)",
-		"Description": "A Microsoft Store application. The specific application name can be found on the Microsoft Store using this ID.",
-		"PackageIdentifier": "XPDC2RH70K22MN",
-		"Category": "Microsoft Store Application"
-	},
-	{
-		"Name": "HEVC Video Extensions (9NRWMJP3717K)",
-		"Description": "HEVC Video Extensions. This extension enables Windows 10/11 devices to play High Efficiency Video Coding (HEVC) videos. Often a Microsoft Store item.",
-		"PackageIdentifier": "9NRWMJP3717K",
-		"Category": "Microsoft Store Application"
-	}
-]
+{
+	"categories": [
+		"Development & Programming",
+		"System Utilities",
+		"Media & Design",
+		"Gaming & Entertainment",
+		"Internet & Productivity",
+		"System Runtimes",
+		"Security & Privacy"
+	],
+	"packages": [
+		{
+			"name": "Visual Studio Code",
+			"description": "Lightweight source code editor with built-in support for JavaScript, TypeScript and Node.js",
+			"packageIdentifier": "Microsoft.VisualStudioCode",
+			"category": "Development & Programming"
+		},
+		{
+			"name": "Git",
+			"description": "Distributed version control system for tracking changes in source code",
+			"packageIdentifier": "Git.Git",
+			"category": "Development & Programming"
+		},
+		{
+			"name": "Python",
+			"description": "Programming language for quick development and system integration",
+			"packageIdentifier": "Python.Python.3.11",
+			"category": "Development & Programming"
+		},
+		{
+			"name": "CPU-Z",
+			"description": "System information and hardware monitoring tool",
+			"packageIdentifier": "CPUID.CPU-Z",
+			"category": "System Utilities"
+		},
+		{
+			"name": "CrystalDiskInfo",
+			"description": "HDD/SSD health monitoring utility",
+			"packageIdentifier": "CrystalDewWorld.CrystalDiskInfo",
+			"category": "System Utilities"
+		},
+		{
+			"name": "Microsoft PowerToys",
+			"description": "Utilities for power users to streamline Windows experience",
+			"packageIdentifier": "Microsoft.PowerToys",
+			"category": "System Utilities"
+		},
+		{
+			"name": "VLC Media Player",
+			"description": "Free cross-platform multimedia player",
+			"packageIdentifier": "VideoLAN.VLC",
+			"category": "Media & Design"
+		},
+		{
+			"name": "OBS Studio",
+			"description": "Free software for video recording and live streaming",
+			"packageIdentifier": "OBSProject.OBSStudio",
+			"category": "Media & Design"
+		},
+		{
+			"name": "GIMP",
+			"description": "Free raster graphics editor",
+			"packageIdentifier": "GIMP.GIMP",
+			"category": "Media & Design"
+		},
+		{
+			"name": "Steam",
+			"description": "Digital distribution platform for video games",
+			"packageIdentifier": "Valve.Steam",
+			"category": "Gaming & Entertainment"
+		},
+		{
+			"name": "Epic Games Launcher",
+			"description": "Digital video game storefront",
+			"packageIdentifier": "EpicGames.EpicGamesLauncher",
+			"category": "Gaming & Entertainment"
+		},
+		{
+			"name": "Discord",
+			"description": "Voice, video and text communication service",
+			"packageIdentifier": "Discord.Discord",
+			"category": "Gaming & Entertainment"
+		},
+		{
+			"name": "Google Chrome",
+			"description": "Web browser developed by Google",
+			"packageIdentifier": "Google.Chrome",
+			"category": "Internet & Productivity"
+		},
+		{
+			"name": "Microsoft Edge",
+			"description": "Web browser developed by Microsoft",
+			"packageIdentifier": "Microsoft.Edge",
+			"category": "Internet & Productivity"
+		},
+		{
+			"name": "qBittorrent",
+			"description": "Free BitTorrent client",
+			"packageIdentifier": "qBittorrent.qBittorrent",
+			"category": "Internet & Productivity"
+		},
+		{
+			"name": "Microsoft Visual C++ 2015-2022 Redistributable",
+			"description": "Runtime components for Visual C++ applications",
+			"packageIdentifier": "Microsoft.VCRedist.2015+.x64",
+			"category": "System Runtimes"
+		},
+		{
+			"name": ".NET Desktop Runtime",
+			"description": "Runtime for .NET desktop applications",
+			"packageIdentifier": "Microsoft.DotNet.DesktopRuntime.7",
+			"category": "System Runtimes"
+		},
+		{
+			"name": "Java Runtime Environment",
+			"description": "Runtime environment for Java applications",
+			"packageIdentifier": "Oracle.JRE",
+			"category": "System Runtimes"
+		},
+		{
+			"name": "Bitdefender Free",
+			"description": "Free antivirus with real-time protection",
+			"packageIdentifier": "Bitdefender.BitdefenderFree",
+			"category": "Security & Privacy"
+		},
+		{
+			"name": "Malwarebytes",
+			"description": "Anti-malware software",
+			"packageIdentifier": "Malwarebytes.Malwarebytes",
+			"category": "Security & Privacy"
+		},
+		{
+			"name": "VeraCrypt",
+			"description": "Free disk encryption software",
+			"packageIdentifier": "IDRIX.VeraCrypt",
+			"category": "Security & Privacy"
+		}
+	]
+}
