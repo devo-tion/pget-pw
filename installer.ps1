@@ -3,6 +3,14 @@ Add-Type -AssemblyName WindowsBase
 Add-Type -AssemblyName PresentationCore
 Add-Type -AssemblyName System.Xaml
 
+# Load icon
+$iconPath = Join-Path $PSScriptRoot "pget-pw.ico"
+$icon = New-Object System.Windows.Media.Imaging.BitmapImage
+$icon.BeginInit()
+$icon.CacheOption = [System.Windows.Media.Imaging.BitmapCacheOption]::OnLoad
+$icon.UriSource = New-Object System.Uri($iconPath)
+$icon.EndInit()
+
 # Load JSON
 $appsConfig = Get-Content -Raw -Path ".\apps.json" | ConvertFrom-Json #!important !fetch config from local files for testing purpose.
 #$appsUrl = "https://raw.githubusercontent.com/devo-tion/pget-pw/refs/heads/main/apps.json"
@@ -27,7 +35,7 @@ $xaml = @"
 <Window 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="pw-pget - Easy windows apps and configurations toolbox"" WindowState="Normal" ResizeMode="NoResize"
+    Title="pget-pw - Easy windows apps and configurations toolbox" WindowState="Normal" ResizeMode="NoResize"
     Background="#1e1e1e" FontFamily="Segoe UI" Foreground="White">
 
     <Window.Resources>
@@ -231,6 +239,9 @@ $xaml = @"
 [xml]$xamlXml = $xaml
 $reader = New-Object System.Xml.XmlNodeReader $xamlXml
 $window = [Windows.Markup.XamlReader]::Load($reader)
+
+# Set window icon
+$window.Icon = $icon
 
 # Get elements
 $programList = $window.FindName("programList")
